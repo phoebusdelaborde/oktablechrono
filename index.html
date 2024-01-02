@@ -1,0 +1,83 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chronomètre</title>
+  <style>
+    body {
+      
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #6A5ACD;
+    }
+    select, button, option {
+      font-size: 16px;
+      cursor:pointer;
+      padding: 8px;
+      margin: 4px;
+      border:none;
+      background:#5F33D1;
+    }
+    
+    #chronometre {
+      font-size: 48px;
+      margin: 16px;
+    }
+  
+  </style>
+</head>
+<body>
+  <h1>Chronomètre</h1>
+  <label for="duree">Choisir la durée : </label>
+  <select id="duree">
+    <option value="60">1 minute</option>
+    <option value="120">2 minutes</option>
+    <option  value="180">3 minutes</option>
+     <option  value="240">4 minutes</option>
+    <option  value="300">5 minutes</option>
+    <option  value="360">6 minutes</option>
+    <option  value="420">7 minutes</option>
+  </select>
+  <br><br>
+  <button onclick="demarrerChronometre()">Démarrer</button>
+  <button onclick="arreterChronometre()">Arrêter</button>
+  <div id="chronometre">00:00</div>
+
+  <script>
+let countdown;
+function demarrerChronometre() {
+  const duree = document.getElementById("duree").value;
+  const timer = document.getElementById("chronometre");
+  let tempsRestant = duree;
+  let minutes;
+  let secondes;
+
+  countdown = setInterval(() => {
+    minutes = Math.floor(tempsRestant / 60);
+    secondes = tempsRestant % 60;
+
+    secondes = secondes < 10 ? '0' + secondes : secondes;
+
+    if (tempsRestant > 0) {
+      timer.textContent = minutes + ':' + secondes;
+      tempsRestant--;
+    } else {
+      clearInterval(countdown);
+      timer.textContent = 'Terminé!';
+    }
+  }, 1000);
+}
+
+function arreterChronometre() {
+  clearInterval(countdown);
+  document.getElementById("chronometre").textContent = '00:00';
+}
+  </script>
+</body>
+</html>
